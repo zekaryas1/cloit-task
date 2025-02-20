@@ -15,5 +15,14 @@ export default function CustomError(props: { error: string }) {
         }
     }, [err])
 
-    return err ? <p className={"text-red-400 border border-gray-200 rounded-md p-2"}>{err}</p> : null;
+    return err ? <span className={"flex py-4 rounded-md text-red-700 animate-pulse"}>{err}</span> : null;
+}
+
+
+export function CustomLoading({isLoading}: { isLoading: boolean }) {
+
+    if (isLoading){
+        return <span className={"flex py-4 rounded-md text-primary-700 animate-pulse"}>Loading, please wait...</span>
+    }
+    return null;
 }

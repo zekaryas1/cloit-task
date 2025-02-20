@@ -1,7 +1,7 @@
 "use client";
 import CloITTree, {CloITTreeActionDataType} from "@/components/TreeComp";
 import {useEffect, useState} from "react";
-import CustomError from "@/components/CustomError";
+import CustomError, {CustomLoading} from "@/components/CustomError";
 import AddNodeForm from "@/components/forms/AddNodeForm";
 import EditNodeForm from "@/components/forms/EditNodeForm";
 import AppButton from "@/components/forms/AppButton";
@@ -15,6 +15,7 @@ export default function MenuDetail({initialTopLevelMenus}: { initialTopLevelMenu
     }>(EMPTY_NODE_DATA);
 
     const [error, setError] = useState<string>("");
+    const [loading, setLoading] = useState<boolean>(false);
     const [menus, setMenus] = useState<MenuModal[]>(initialTopLevelMenus);
     const [selectedMenuDetail, setSelectedMenuDetail] = useState<Partial<{ id: string, detail: MenuModal }>>({
         id: undefined,
@@ -54,6 +55,7 @@ export default function MenuDetail({initialTopLevelMenus}: { initialTopLevelMenu
         body?: Record<string, unknown>
     ) => {
         try {
+            setLoading(true);
             const response = await fetch(url, {
                 method,
                 headers: {"Content-Type": "application/json"},
@@ -77,6 +79,7 @@ export default function MenuDetail({initialTopLevelMenus}: { initialTopLevelMenu
             console.error(err);
             setError("Node operation failed: please try again.");
         } finally {
+            setLoading(false);
             setFormData(EMPTY_NODE_DATA);
         }
     };
@@ -135,6 +138,7 @@ export default function MenuDetail({initialTopLevelMenus}: { initialTopLevelMenu
 
             <div className="col-span-12 md:col-span-6 space-y-3" key={formData.data.id}>
                 <CustomError error={error}/>
+                <CustomLoading isLoading={loading} />
                 {formData.type === "ADD" ? (
                     <AddNodeForm data={formData.data} onAdd={addNewNode}/>
                 ) : (
