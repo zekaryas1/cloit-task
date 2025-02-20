@@ -58,12 +58,25 @@ export class MenuService {
   }
 
   async findChildren(parentId: string): Promise<Menu | null> {
+    //only fetches 8 level deep, can be adjusted
     return this.prisma.menu.findUnique({
       where: { id: parentId },
       include: {
         children: {
           include: {
-            children: true, // Recursively fetch child menus
+            children: {
+              include: {
+                children: {
+                  include: {
+                    children: {
+                      include: {
+                        children: true,
+                      },
+                    },
+                  },
+                },
+              },
+            }, // Recursively fetch child menus
           },
         },
       },
