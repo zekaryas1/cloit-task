@@ -12,7 +12,9 @@ export default function AddNodeForm(props: AddNodeFormPropType) {
 
     const addNodeFormAction = (formData: FormData) => {
         const name = formData.get("name");
-        onAdd(name as string, data.id);
+        if (name && data.id){
+            onAdd(name as string, data.id);
+        }
     }
 
     return <form action={addNodeFormAction} className={"space-y-6"}>
@@ -23,7 +25,7 @@ export default function AddNodeForm(props: AddNodeFormPropType) {
         <AppInput value={data.name} placeholder={"Parent Data"} name={"parentName"} label={"Parent Data"}
                   isDisabled={true}/>
 
-        <AppInput value={""} placeholder={"Name"} name={"name"} label={"Name"} isFocused={true}/>
+        <AppInput value={""} placeholder={"Name"} name={"name"} label={"Name"} isFocused={true} isRequired={true}/>
 
 
         <AppButton variant={"Secondary"} type={"submit"} label={"Save"} className={"min-w-72"}/>

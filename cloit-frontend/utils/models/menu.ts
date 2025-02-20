@@ -5,8 +5,8 @@ export const EMPTY_NODE_DATA = {
         name: "",
         depth: 0,
         parent: {
-            id: "1",
-            name: "get parent name",
+            id: "",
+            name: "default parent name",
         },
     },
 } as const;

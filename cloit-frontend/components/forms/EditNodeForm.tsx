@@ -27,9 +27,9 @@ export default function EditNodeForm(props: EditNodeFormPropType) {
         <AppInput value={data.depth} placeholder={"Depth"} name={"depth"} label={"Depth"} isDisabled={true}/>
 
         <AppInput value={data.parent.name} placeholder={"Parent Data"} name={"parentId"} label={"Parent Data"}
-                  isDisabled={true}/>
+                  isDisabled={true} isRequired={true}/>
 
-        <AppInput value={data.name} placeholder={"Name"} name={"name"} label={"Name"} isFocused={true}/>
+        <AppInput value={data.name} placeholder={"Name"} name={"name"} label={"Name"} isFocused={true} isRequired={true}/>
 
         <div className="flex gap-2 flex-wrap">
             <AppButton variant={"Secondary"} type={"submit"} label={"Rename"} className={"min-w-72"}/>

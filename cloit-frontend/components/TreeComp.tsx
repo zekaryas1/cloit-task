@@ -37,11 +37,23 @@ type CustomNodeProps = DefaultNodeProps & {
 export default function CloITTree(props: CloITTreeProps) {
     const {onAddBottomClick, onEditNodeClick, data} = props;
 
+    const calcDepth = (node: TreeNode) => {
+            let depth = 0;
+            let current: TreeNode | undefined = node;
+
+            while (current?.options.root == false) {
+                depth++;
+                current = current.options.parent; // Move up to the parent node
+            }
+
+            return depth;
+    };
+
     const treeNodeClickHandler = ({type, node}: ClickAction) => {
         const nodeData = {
             id: node.data.id,
             name: node.data.name,
-            depth: 1,
+            depth: calcDepth(node),
             parent: {
                 id: node.options.parent?.data.id,
                 name: node.options.parent?.data.name,
@@ -100,7 +112,7 @@ export default function CloITTree(props: CloITTreeProps) {
                         // ])
                         // treeHandlers.trees["CloITTree_id"].handlers.rerender();
 
-                        //Delete - WIP
+                        //Delete
                         //const nodeData = treeHandlers.trees["CloITTree_id"].handlers.getNode(25);
                         //const {id} = nodeData.options.parent;
                         //handlers.getNode(id)?.removeChild(nodeData);
