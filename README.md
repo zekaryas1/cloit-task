@@ -1,5 +1,7 @@
 Fullstack challenge
 
+![challenge app result screenshot](cloit%20task%20screenshot.png)
+
 - Backend - Nest.js with Prisma and PostgreSQL
   - create `.env` file with DATABASE_URL
   - `yarn`
